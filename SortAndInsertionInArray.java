@@ -1,70 +1,65 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class SortAndInsertionInArray {
+public class SortingAndInsertionIntoAnArray {
 	public static void main(String[] args) {
 		
 		Scanner scan = new Scanner(System.in);
+		System.out.println("Enter the size of an array: ");
 		
-		System.out.println("Enter size of an array: ");
 		int size = scan.nextInt();
+		int arr[] = new int[size];
+		int array[] = new int[size+1];
 		
-		int arr[] = new int[size + 1];
+		//initialising an array
 		
-		//Initialising an array
-		
-		System.out.println("Enter all the elements into an array:  ");
-		for (int i = 0; i < size; i++) {
+		System.out.println("Enter all the elements into an array: ");
+		for (int i = 0; i < arr.length; i++) {
 			
-			arr[i]= scan.nextInt();
+			arr[i] = scan.nextInt();
 		}
 		
-		Arrays.sort(arr); // Sorting an array
+		System.arraycopy(arr, 0, array, 0, arr.length);
 		
-		printArray("Sorted Array",arr); // printing a sorted array
+		Arrays.sort(arr);
+		System.arraycopy(arr, 0, array, 0, arr.length);
+		printArray("Sorted array", arr);
 		
-		System.out.println("Enter the location where you want to enter new element: ");
+		System.out.println("Enter the position where you want to insert an element: ");
 		int pos = scan.nextInt();
 		
-		System.out.println("Enter the new element to be enterred :");
+		System.out.println("Enter an element to insert into an array: ");
 		int element = scan.nextInt();
 		
-		insertElement(pos, element, arr); // inserting new element at specified location in an array
+		insertElement(pos, element,array);
 		
 	}
 	
 	public static void printArray(String message, int array[]){
-		
-		System.out.println("***********************************");
-		System.out.println(message+" [Length: "+array.length+" ]");
 		System.out.println();
+		System.out.println(message+" [Length: "+array.length+" ]");
 		
 		for (int i = 0; i < array.length; i++) {
-		
-			if (array[i] == 0){
-				continue;
-			}
 			System.out.print(array[i]);
 			System.out.print(" ");
 		}
-		
 		System.out.println();
 		System.out.println("***********************************");
+		System.out.println();
 	}
 	
-	public static void insertElement(int pos, int element, int array[]){
+	public static void insertElement(int pos, int element, int []array){
 		
-	
 		
-		int size = array.length -1;
-
-		for (int i = 0; i < pos ; i++) {
-			array[i] = array[i+1];
+		int size = array.length;
+		for (int i = size-2; i>= pos-1 ; i--) {
+			
+			array[i+1] =  array[i];
+			
 		}
 		
 		array[pos -1] = element;
 		
 		printArray("Array after inserting an element",array);
 	}
-	
 }
